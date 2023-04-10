@@ -1,4 +1,4 @@
-package com.example.officialgsmclientserver.domain.board.entity;
+package com.example.officialgsmclientserver.domain.board.entity.post;
 
 public enum Category {
 
