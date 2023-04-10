@@ -1,5 +1,7 @@
-package com.example.officialgsmclientserver.domain.board.entity;
+package com.example.officialgsmclientserver.domain.board.entity.post;
 
+import com.example.officialgsmclientserver.domain.board.entity.file.File;
+import com.example.officialgsmclientserver.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
