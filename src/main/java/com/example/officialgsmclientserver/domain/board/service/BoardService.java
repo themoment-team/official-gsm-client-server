@@ -22,9 +22,9 @@ public class BoardService {
 
     public Page<PostListResponse> findPostList(int pageNumber, Category category) {
         Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("createdAt").descending());   // pageSize는 추후 수정
-        Page<Post> posts = postRepository.findAllByCategory(pageable, category);
+        Page<Post> postList = postRepository.findAllByCategory(pageable, category);
 
-        return posts.map(PostListResponse::from);
+        return postList.map(PostListResponse::from);
     }
 
     public PostDetailResponse findPost(Long postSeq) {
