@@ -20,7 +20,7 @@ public class BoardService {
 
     private final PostRepository postRepository;
 
-    public Page<PostListResponse> findPosts(int pageNumber, Category category) {
+    public Page<PostListResponse> findPostList(int pageNumber, Category category) {
         Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("createdAt").descending());   // pageSize는 추후 수정
         Page<Post> posts = postRepository.findAllByCategory(pageable, category);
 
