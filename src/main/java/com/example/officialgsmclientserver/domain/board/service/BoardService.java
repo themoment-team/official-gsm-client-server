@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ public class BoardService {
 
     private final PostRepository postRepository;
 
+    @Transactional(readOnly = true)
     public Page<PostListResponse> findPostList(int pageNumber, Category category) {
         Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("createdAt").descending());   // pageSize는 추후 수정
         Page<Post> postList = postRepository.findAllByCategory(pageable, category);
@@ -27,6 +29,7 @@ public class BoardService {
         return postList.map(PostListResponse::from);
     }
 
+    @Transactional(readOnly = true)
     public PostDetailResponse findPost(Long postSeq) {
         Post post = postRepository.findById(postSeq)
                 .orElseThrow(() -> new CustomException("게시글 세부 조회 과정에서 게시글을 찾지 못하였습니다.", HttpStatus.NOT_FOUND));
