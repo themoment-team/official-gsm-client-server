@@ -18,10 +18,8 @@ import java.util.UUID;
 public class File {
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Builder.Default
-    private String fileSeq = UUID.randomUUID().toString();
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String fileSeq;
 
     private String fileUrl;
 

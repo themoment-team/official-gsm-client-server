@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class PostDetailResponse {
 
     private String postTitle;
-    private String writer;
+    private String postWriter;
     private String postContent;
     private LocalDateTime createdAt;
     private List<FileInfoResponse> fileInfo;
@@ -25,7 +25,7 @@ public class PostDetailResponse {
     public static PostDetailResponse from(Post post) {
         return PostDetailResponse.builder()
                 .postTitle(post.getPostTitle())
-                .writer(post.getUser().getUserName())
+                .postWriter(post.getUser().getUserName())
                 .postContent(post.getPostContent())
                 .createdAt(post.getCreatedAt())
                 .fileInfo(post.getFiles().stream()
