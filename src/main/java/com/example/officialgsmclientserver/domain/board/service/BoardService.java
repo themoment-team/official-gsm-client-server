@@ -1,7 +1,7 @@
 package com.example.officialgsmclientserver.domain.board.service;
 
 import com.example.officialgsmclientserver.domain.board.dto.response.PostDetailResponse;
-import com.example.officialgsmclientserver.domain.board.dto.response.PostListResponse;
+import com.example.officialgsmclientserver.domain.board.dto.response.PostInfoDto;
 import com.example.officialgsmclientserver.domain.board.entity.post.Category;
 import com.example.officialgsmclientserver.domain.board.entity.post.Post;
 import com.example.officialgsmclientserver.domain.board.repository.PostRepository;
@@ -22,11 +22,11 @@ public class BoardService {
     private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
-    public Page<PostListResponse> findPostList(int pageNumber, Category category) {
+    public Page<PostInfoDto> findPostList(int pageNumber, Category category) {
         Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("createdAt").descending());   // pageSize는 추후 수정
         Page<Post> postList = postRepository.findAllByCategory(pageable, category);
 
-        return postList.map(PostListResponse::from);
+        return postList.map(PostInfoDto::from);
     }
 
     @Transactional(readOnly = true)

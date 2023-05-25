@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostListResponse {
+public class PostInfoDto {
 
     private Long postSeq;
     private String postTitle;
@@ -22,9 +22,9 @@ public class PostListResponse {
     private Boolean FileIsExist;
     private String thumbnailUrl;
 
-    public static PostListResponse from(Post post) {
+    public static PostInfoDto from(Post post) {
         if(post.getCategory() == Category.EVENT_GALLERY) {
-            return PostListResponse.builder()
+            return PostInfoDto.builder()
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
                     .createdAt(post.getCreatedAt())
@@ -33,7 +33,7 @@ public class PostListResponse {
                     .FileIsExist(null)
                     .build();
         } else {
-            return PostListResponse.builder()
+            return PostInfoDto.builder()
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
                     .postWriter(post.getUser().getUserName())
