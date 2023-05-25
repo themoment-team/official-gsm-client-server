@@ -19,7 +19,7 @@ public class File {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String fileSeq;
+    private Long fileSeq;
 
     private String fileUrl;
 
