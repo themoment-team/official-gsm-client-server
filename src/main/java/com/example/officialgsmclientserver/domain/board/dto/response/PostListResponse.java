@@ -1,46 +1,16 @@
 package com.example.officialgsmclientserver.domain.board.dto.response;
 
-import com.example.officialgsmclientserver.domain.board.entity.post.Category;
-import com.example.officialgsmclientserver.domain.board.entity.post.Post;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostListResponse {
 
-    private Long postSeq;
-    private String postTitle;
-    private String postWriter;
-    private LocalDateTime createdAt;
-    private Boolean FileIsExist;
-    private String thumbnailUrl;
-
-    public static PostListResponse from(Post post) {
-        if(post.getCategory() == Category.EVENT_GALLERY) {
-            return PostListResponse.builder()
-                    .postSeq(post.getPostSeq())
-                    .postTitle(post.getPostTitle())
-                    .createdAt(post.getCreatedAt())
-                    .thumbnailUrl(post.getFiles().get(0).getFileUrl())
-                    .postWriter(null)
-                    .FileIsExist(null)
-                    .build();
-        } else {
-            return PostListResponse.builder()
-                    .postSeq(post.getPostSeq())
-                    .postTitle(post.getPostTitle())
-                    .postWriter(post.getUser().getUserName())
-                    .FileIsExist(post.getFiles()!=null)
-                    .createdAt(post.getCreatedAt())
-                    .thumbnailUrl(null)
-                    .build();
-        }
-    }
+    private List<PostInfoDto> postList;
+    private int totalPages;
 }

@@ -1,6 +1,7 @@
 package com.example.officialgsmclientserver.domain.board.service;
 
 import com.example.officialgsmclientserver.domain.board.dto.response.PostDetailResponse;
+import com.example.officialgsmclientserver.domain.board.dto.response.PostInfoDto;
 import com.example.officialgsmclientserver.domain.board.dto.response.PostListResponse;
 import com.example.officialgsmclientserver.domain.board.entity.post.Category;
 import com.example.officialgsmclientserver.domain.board.entity.post.Post;
@@ -15,6 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
@@ -22,11 +26,13 @@ public class BoardService {
     private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
-    public Page<PostListResponse> findPostList(int pageNumber, Category category) {
+    public PostListResponse findPostList(int pageNumber, Category category) {
         Pageable pageable = PageRequest.of(pageNumber, 5, Sort.by("createdAt").descending());   // pageSize는 추후 수정
         Page<Post> postList = postRepository.findAllByCategory(pageable, category);
+        List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
+                .map(PostInfoDto::from).toList();
 
-        return postList.map(PostListResponse::from);
+        return new PostListResponse(postInfoDtoList, postList.getTotalPages());
     }
 
     @Transactional(readOnly = true)
