@@ -11,11 +11,9 @@ public class FileInfoResponse {
 
     private String fileUrl;
     private String fileName;
-    private FileExtension fileExtension;
 
     public FileInfoResponse(File file) {
         this.fileUrl = file.getFileUrl();
         this.fileName = file.getFileName();
-        this.fileExtension = file.getFileExtension();
     }
 }
