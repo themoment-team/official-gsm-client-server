@@ -26,9 +26,9 @@ public class PostInfoDto {
             return PostInfoDto.builder()
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
+                    .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(post.getFiles().get(0).getFileUrl())
-                    .postWriter(null)
                     .build();
         } else {
             return PostInfoDto.builder()
