@@ -19,7 +19,6 @@ public class PostInfoDto {
     private String postTitle;
     private String postWriter;
     private LocalDateTime createdAt;
-    private Boolean FileIsExist;
     private String thumbnailUrl;
 
     public static PostInfoDto from(Post post) {
@@ -30,14 +29,12 @@ public class PostInfoDto {
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(post.getFiles().get(0).getFileUrl())
                     .postWriter(null)
-                    .FileIsExist(null)
                     .build();
         } else {
             return PostInfoDto.builder()
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
                     .postWriter(post.getUser().getUserName())
-                    .FileIsExist(post.getFiles()!=null)
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(null)
                     .build();
