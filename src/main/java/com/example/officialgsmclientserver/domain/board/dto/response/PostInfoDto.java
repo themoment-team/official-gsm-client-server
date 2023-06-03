@@ -20,7 +20,7 @@ public class PostInfoDto {
     private String postWriter;
     private LocalDateTime createdAt;
     private Boolean FileIsExist;
-    private String thumbnailUrl;
+    private String bannerUrl;
 
     public static PostInfoDto from(Post post) {
         if(post.getCategory() == Category.EVENT_GALLERY) {
@@ -28,7 +28,7 @@ public class PostInfoDto {
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
                     .createdAt(post.getCreatedAt())
-                    .thumbnailUrl(post.getFiles().get(0).getFileUrl())
+                    .bannerUrl(post.getBannerUrl())
                     .postWriter(null)
                     .FileIsExist(null)
                     .build();
@@ -39,7 +39,7 @@ public class PostInfoDto {
                     .postWriter(post.getUser().getUserName())
                     .FileIsExist(post.getFiles()!=null)
                     .createdAt(post.getCreatedAt())
-                    .thumbnailUrl(null)
+                    .bannerUrl(null)
                     .build();
         }
     }
