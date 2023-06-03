@@ -28,7 +28,7 @@ public class PostInfoDto {
                     .postSeq(post.getPostSeq())
                     .postTitle(post.getPostTitle())
                     .createdAt(post.getCreatedAt())
-                    .bannerUrl(post.getFiles().get(0).getFileUrl())
+                    .bannerUrl(post.getBannerUrl())
                     .postWriter(null)
                     .FileIsExist(null)
                     .build();
