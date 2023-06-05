@@ -30,7 +30,7 @@ public class PostInfoDto {
                     .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(post.getFiles().get(0).getFileUrl())
-                    .contentPreview(post.getPostContent().substring(0, 40))
+                    .contentPreview(extractContentPreview(post.getPostContent()))
                     .build();
         } else {
             return PostInfoDto.builder()
@@ -39,8 +39,12 @@ public class PostInfoDto {
                     .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(null)
-                    .contentPreview(post.getPostContent().substring(0, 40))
+                    .contentPreview(extractContentPreview(post.getPostContent()))
                     .build();
         }
+    }
+
+    private static String extractContentPreview(String content) {
+        return content.length() > 40 ? content.substring(0, 40) : content;
     }
 }
