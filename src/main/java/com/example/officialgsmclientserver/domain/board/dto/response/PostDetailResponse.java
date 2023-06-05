@@ -19,6 +19,7 @@ public class PostDetailResponse {
     private String postTitle;
     private String postWriter;
     private String postContent;
+    private String bannerUrl;
     private LocalDateTime createdAt;
     private List<FileInfoResponse> fileInfo;
 
@@ -27,6 +28,7 @@ public class PostDetailResponse {
                 .postTitle(post.getPostTitle())
                 .postWriter(post.getUser().getUserName())
                 .postContent(post.getPostContent())
+                .bannerUrl(post.getBannerUrl())
                 .createdAt(post.getCreatedAt())
                 .fileInfo(post.getFiles().stream()
                         .map(FileInfoResponse::new)

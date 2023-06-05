@@ -36,7 +36,7 @@ public class PostInfoDto {
                     .postTitle(post.getPostTitle())
                     .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
-                    .thumbnailUrl(null)
+                    .bannerUrl(null)
                     .build();
         }
     }
