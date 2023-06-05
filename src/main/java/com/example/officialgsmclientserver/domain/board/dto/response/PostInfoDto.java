@@ -20,6 +20,7 @@ public class PostInfoDto {
     private String postWriter;
     private LocalDateTime createdAt;
     private String thumbnailUrl;
+    private String contentPreview;
 
     public static PostInfoDto from(Post post) {
         if(post.getCategory() == Category.EVENT_GALLERY) {
@@ -29,6 +30,7 @@ public class PostInfoDto {
                     .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
                     .thumbnailUrl(post.getFiles().get(0).getFileUrl())
+                    .contentPreview(post.getPostContent().substring(0, 40))
                     .build();
         } else {
             return PostInfoDto.builder()
@@ -36,7 +38,8 @@ public class PostInfoDto {
                     .postTitle(post.getPostTitle())
                     .postWriter(post.getUser().getUserName())
                     .createdAt(post.getCreatedAt())
-                    .bannerUrl(null)
+                    .thumbnailUrl(null)
+                    .contentPreview(post.getPostContent().substring(0, 40))
                     .build();
         }
     }
