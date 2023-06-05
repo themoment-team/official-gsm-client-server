@@ -1,13 +1,12 @@
 package com.example.officialgsmclientserver.domain.user.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Entity
@@ -18,11 +17,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_seq")
     private Long userSeq;
+
+    private String oauthId;
 
     private String userName;
 
-    private String userId;
+    private String userEmail;
 
-    private String userPwd;
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "grantor_seq", referencedColumnName = "user_seq")
+    private User grantor;
+
+    private LocalDateTime approvedAt;
 }
