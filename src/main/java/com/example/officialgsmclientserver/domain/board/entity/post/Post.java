@@ -27,8 +27,6 @@ public class Post extends BaseTimeEntity {
 
     private String postContent;
 
-    private String bannerUrl;
-
     @Enumerated(EnumType.STRING)
     private Category category;
 
