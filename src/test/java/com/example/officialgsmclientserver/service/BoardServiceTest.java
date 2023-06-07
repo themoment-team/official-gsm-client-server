@@ -1,5 +1,6 @@
 package com.example.officialgsmclientserver.service;
 
+import com.example.officialgsmclientserver.domain.board.dto.response.PostDetailResponse;
 import com.example.officialgsmclientserver.domain.board.dto.response.PostListResponse;
 import com.example.officialgsmclientserver.domain.board.entity.file.File;
 import com.example.officialgsmclientserver.domain.board.entity.file.FileExtension;
@@ -90,5 +91,18 @@ public class BoardServiceTest {
         assertThat(response.getPostList().get(0).getThumbnailUrl()).isEqualTo(fileRepository.findAll().get(0).getFileUrl());
         assertThat(response.getPostList().get(0).getPostWriter()).isEqualTo("최장우");
         assertThat(response.getTotalPages()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("게시물 상세 조회")
+    void findPost() {
+        Post post = postRepository.findAll().get(0);
+        System.out.println(post.getPostSeq());
+        PostDetailResponse response = boardService.findPost(post.getPostSeq());
+
+        assertThat(response.getPostTitle()).isEqualTo("title");
+        assertThat(response.getPostWriter()).isEqualTo("최장우");
+        assertThat(response.getFileInfo().get(0).getFileUrl()).isEqualTo("http://bucket.ottokeng.site/743d7afd-690c-404a-b7fb-b6fe97598504.jpg");
+        assertThat(response.getFileInfo().get(0).getFileExtension()).isEqualTo(FileExtension.JPG);
     }
 }
