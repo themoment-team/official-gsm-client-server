@@ -45,6 +45,6 @@ public class PostInfoDto {
     }
 
     private static String extractContentPreview(String content) {
-        return content.length() > 40 ? content.substring(0, 40) : content;
+        return content.length() > 100 ? content.substring(0, 100) : content;
     }
 }
