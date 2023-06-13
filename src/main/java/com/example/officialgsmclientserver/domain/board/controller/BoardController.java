@@ -27,7 +27,8 @@ public class BoardController {
     )
     public ResponseEntity<PostListResponse> postList(
             @Parameter(name = "pageNumber", description = "게시물 목록의 pageNumber, 0부터 시작", in = ParameterIn.PATH)
-            @RequestParam int pageNumber, @Parameter(name = "category", description = "조회할 게시물 목록의 카테고리", in = ParameterIn.PATH)
+            @RequestParam int pageNumber,
+            @Parameter(name = "category", description = "조회할 게시물 목록의 카테고리", in = ParameterIn.PATH)
             @RequestParam Category category
     ) {
         PostListResponse postList = boardService.findPostList(pageNumber, category);
