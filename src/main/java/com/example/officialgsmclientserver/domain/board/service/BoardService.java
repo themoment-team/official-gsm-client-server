@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +40,15 @@ public class BoardService {
                 .orElseThrow(() -> new CustomException("게시글 세부 조회 과정에서 게시글을 찾지 못하였습니다.", HttpStatus.NOT_FOUND));
 
         return PostDetailResponse.from(post);
+    }
+
+    @Transactional(readOnly = true)
+    public PostListResponse findKeywordContainPost(int pageNumber, Category category, String keyword) {
+        Pageable pageable = PageRequest.of(pageNumber, 6, Sort.by("createdAt").descending());
+        Page<Post> postList = postRepository.findByPostTitleContaining(pageable, keyword);
+        List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
+                .map(PostInfoDto::from).toList();
+
+        return new PostListResponse(postInfoDtoList, postList.getTotalPages());
     }
 }
