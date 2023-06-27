@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,9 +26,12 @@ public class BoardService {
     private final PostRepository postRepository;
 
     @Transactional(readOnly = true)
-    public PostListResponse findPostList(int pageNumber, Category category) {
+    public PostListResponse findPostList(int pageNumber, Category category, String keyword) {
         Pageable pageable = PageRequest.of(pageNumber, 6, Sort.by("createdAt").descending());
-        Page<Post> postList = postRepository.findAllByCategory(pageable, category);
+        Page<Post> postList = keyword == null
+                ? postRepository.findAllByCategory(pageable, category)
+                : postRepository.findAllByCategoryAndPostTitleContaining(pageable, category, keyword);
+
         List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
                 .map(PostInfoDto::from).toList();
 
