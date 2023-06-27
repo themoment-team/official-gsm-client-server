@@ -48,22 +48,4 @@ public class BoardController {
         PostDetailResponse postDetail = boardService.findPost(postSeq);
         return new ResponseEntity<>(postDetail, HttpStatus.OK);
     }
-
-    @GetMapping("/search")
-    @Operation(
-            summary = "게시물 검색 목록 조회 요청",
-            description = "게시물 검색 목록을 조회하는 api",
-            tags = {"Board Controller"}
-    )
-    public ResponseEntity<PostListResponse> postSearch(
-            @Parameter(name = "pageNumber", description = "게시물 목록의 pageNumber, 0부터 시작", in = ParameterIn.PATH)
-            @RequestParam int pageNumber,
-            @Parameter(name = "category", description = "게시물 목록의 카테고리", in = ParameterIn.PATH)
-            @RequestParam Category category,
-            @Parameter(name = "keyword", description = "게시물 목록의 제목에 포함될 키워드", in = ParameterIn.PATH)
-            @RequestParam String keyword
-    ) {
-        PostListResponse postList = boardService.findKeywordContainPost(pageNumber, category, keyword);
-        return new ResponseEntity<>(postList, HttpStatus.OK);
-    }
 }

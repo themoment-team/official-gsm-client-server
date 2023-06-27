@@ -41,14 +41,4 @@ public class BoardService {
 
         return PostDetailResponse.from(post);
     }
-
-    @Transactional(readOnly = true)
-    public PostListResponse findKeywordContainPost(int pageNumber, Category category, String keyword) {
-        Pageable pageable = PageRequest.of(pageNumber, 6, Sort.by("createdAt").descending());
-        Page<Post> postList = postRepository.findByPostTitleContaining(pageable, keyword);
-        List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
-                .map(PostInfoDto::from).toList();
-
-        return new PostListResponse(postInfoDtoList, postList.getTotalPages());
-    }
 }
