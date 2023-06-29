@@ -1,6 +1,7 @@
 package com.example.officialgsmclientserver.domain.board.controller;
 
 import com.example.officialgsmclientserver.domain.board.dto.response.PostDetailResponse;
+import com.example.officialgsmclientserver.domain.board.dto.response.PostInfoDto;
 import com.example.officialgsmclientserver.domain.board.dto.response.PostListResponse;
 import com.example.officialgsmclientserver.domain.board.entity.post.Category;
 import com.example.officialgsmclientserver.domain.board.service.BoardService;
@@ -11,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
@@ -47,5 +50,11 @@ public class BoardController {
     ) {
         PostDetailResponse postDetail = boardService.findPost(postSeq);
         return new ResponseEntity<>(postDetail, HttpStatus.OK);
+    }
+
+    @GetMapping("/pinned/{category}")
+    public ResponseEntity<List<PostInfoDto>> pinnedPostList(@PathVariable Category category) {
+        List<PostInfoDto> pinnedPostList = boardService.findPinnedPostList(category);
+        return new ResponseEntity<>(pinnedPostList, HttpStatus.OK);
     }
 }

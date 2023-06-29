@@ -42,4 +42,12 @@ public class BoardService {
 
         return PostDetailResponse.from(post);
     }
+
+    @Transactional(readOnly = true)
+    public List<PostInfoDto> findPinnedPostList(Category category) {
+        List<Post> postList = postRepository.findPinnedPostByCategory(category);
+
+        return postList.stream()
+                .map(PostInfoDto::from).toList();
+    }
 }
