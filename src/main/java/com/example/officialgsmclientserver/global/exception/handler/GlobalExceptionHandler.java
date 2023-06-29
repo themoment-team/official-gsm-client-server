@@ -17,10 +17,4 @@ public class GlobalExceptionHandler {
         return ErrorResponse.toResponseEntity(e.getDetailMessage(), e.getHttpStatus());
     }
 
-    @ExceptionHandler(Exception.class)
-    protected ResponseEntity<ErrorResponse> handleUnCheckedException(Exception e) {
-        log.warn("UnCheckedException: {}", e.getStackTrace());
-        return ErrorResponse.toResponseEntity("예외 처리되지 않은 에러가 발생하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
 }
