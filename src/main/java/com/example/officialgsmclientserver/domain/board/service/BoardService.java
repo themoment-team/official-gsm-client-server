@@ -27,7 +27,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public PostListResponse findPostList(int pageNumber, Category category) {
-        if(pageNumber == 0) {
+        if(pageNumber < 1) {
             throw new CustomException("Page index must not be less than 1", HttpStatus.BAD_REQUEST);
         }
 
