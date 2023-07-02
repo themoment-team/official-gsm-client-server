@@ -27,7 +27,7 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public PostListResponse findPostList(int pageNumber, Category category) {
-        Pageable pageable = PageRequest.of(pageNumber, 6, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(pageNumber - 1, 6, Sort.by("createdAt").descending());
         Page<Post> postList = postRepository.findAllByCategory(pageable, category);
         List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
                 .map(PostInfoDto::from).toList();
