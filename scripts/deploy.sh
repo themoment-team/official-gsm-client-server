@@ -8,4 +8,4 @@ docker build -t official-test-server:client .
 
 docker-compose up -d
 
-docker rmi $(docker images -f "dangling=true" -q)
+docker image prune
