@@ -1,4 +1,4 @@
- Setting JDK 17 with amazoncorretto
+#Setting JDK 17 with amazoncorretto
 FROM amazoncorretto:17
 
 # Add a volume to /tmp
