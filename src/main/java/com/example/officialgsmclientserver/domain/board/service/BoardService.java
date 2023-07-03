@@ -27,6 +27,10 @@ public class BoardService {
 
     @Transactional(readOnly = true)
     public PostListResponse findPostList(int pageNumber, Category category) {
+        if(pageNumber < 1) {
+            throw new CustomException("Page index must not be less than 1", HttpStatus.BAD_REQUEST);
+        }
+
         Pageable pageable = PageRequest.of(pageNumber - 1, 6, Sort.by("createdAt").descending());
         Page<Post> postList = postRepository.findAllByCategory(pageable, category);
         List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
