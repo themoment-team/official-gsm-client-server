@@ -13,4 +13,5 @@ public class PostListResponse {
 
     private List<PostInfoDto> postList;
     private int totalPages;
+    private long totalElements;
 }

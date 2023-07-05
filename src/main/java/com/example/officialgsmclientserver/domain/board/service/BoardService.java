@@ -36,7 +36,7 @@ public class BoardService {
         List<PostInfoDto> postInfoDtoList = postList.getContent().stream()
                 .map(PostInfoDto::from).toList();
 
-        return new PostListResponse(postInfoDtoList, postList.getTotalPages());
+        return new PostListResponse(postInfoDtoList, postList.getTotalPages(), postList.getTotalElements());
     }
 
     @Transactional(readOnly = true)
