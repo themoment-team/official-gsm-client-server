@@ -28,7 +28,7 @@ public class BoardService {
     @Transactional(readOnly = true)
     public PostListResponse findPostList(int pageNumber, Category category, String keyword) {
         Pageable pageable = PageRequest.of(pageNumber, 6, Sort.by("createdAt").descending());
-        Page<Post> postList = keyword == null
+        Page<Post> postList = keyword.isBlank()
                 ? postRepository.findAllByCategory(pageable, category)
                 : postRepository.findAllByCategoryAndPostTitleContaining(pageable, category, keyword);
 
