@@ -67,20 +67,20 @@ jobs:
 
       - name: upload to s3
         env:
-          IMAGE_TAG: $GITHUB_SHA
+          IMAGE_TAG: ${{ GITHUB.SHA }}
         run: |
-          zip -r $IMAGE_TAG.zip ./scripts appspec.yml
-          aws s3 cp --region ap-northeast-2 --acl private ./$IMAGE_TAG.zip s3://${{ secrets.PROD_BUCKET_NAME }}/client/
+          zip -r ${{ env.IMAGE_TAG }}.zip ./scripts appspec.yml
+          aws s3 cp --region ap-northeast-2 --acl private ./${{ env.IMAGE_TAG }}.zip s3://${{ secrets.PROD_BUCKET_NAME }}/client/
 
 
       - name: start deploy
         env:
-          IMAGE_TAG: $GITHUB_SHA
+          IMAGE_TAG: ${{ GITHUB.SHA }}
         run: |
           aws deploy create-deployment --application-name ${{ secrets.PROD_APP_NAME }} \
           --deployment-config-name CodeDeployDefault.OneAtATime \
           --deployment-group-name ${{ secrets.PROD_GROUP_NAME }} \
-          --s3-location bucket=${{ secrets.PROD_BUCKET_NAME }},bundleType=zip,key=/client/$IMAGE_TAG.zip
+          --s3-location bucket=${{ secrets.PROD_BUCKET_NAME }},bundleType=zip,key=/client/${{ env.IMAGE_TAG}}.zip
 
       - name: official-gsm-prod-client-server-ci-success
         uses: sarisia/actions-status-discord@v1
