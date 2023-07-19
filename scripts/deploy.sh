@@ -13,4 +13,6 @@ elif [ "$DEPLOYMENT_GROUP_NAME" == "official-prod-client-server" ]; then
   echo "Running prod-deploy.sh..."
   /scripts/prod-deploy.sh
 else
-  echo "
+  echo "Unknown deployment group: $DEPLOYMENT_GROUP_NAME"
+  exit 1
+fi
