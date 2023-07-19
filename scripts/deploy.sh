@@ -7,11 +7,11 @@ DEPLOYMENT_GROUP_NAME=$(echo $DEPLOYMENT_GROUP_NAME)
 if [ "$DEPLOYMENT_GROUP_NAME" == "official-client-test-server" ]; then
   # official-client-test-server 배포 그룹에 대한 스크립트 실행
   echo "Running dev-deploy.sh..."
-  /scripts/dev-deploy.sh
+  /home/ec2-user/official-gsm-client-server/scripts/dev-deploy.sh
 elif [ "$DEPLOYMENT_GROUP_NAME" == "official-prod-client-server" ]; then
   # official-prod-client-server 배포 그룹에 대한 스크립트 실행
   echo "Running prod-deploy.sh..."
-  /scripts/prod-deploy.sh
+  /home/ec2-user/official-gsm-client-server/scripts/prod-deploy.sh
 else
   echo "Unknown deployment group: $DEPLOYMENT_GROUP_NAME"
   exit 1
