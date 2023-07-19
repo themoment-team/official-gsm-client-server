@@ -15,7 +15,14 @@ permissions:
 
 hooks:
   ApplicationStart:
-
-    - location: !If [ ${var:group} == "official-client-test-server", "/scripts/dev-deploy.sh", "/scripts/prod-deploy.sh" ]
+    - location: /scripts/dev-deploy.sh
       timeout: 60
       runas: root
+      rules:
+        - condition: "DEPLOYMENT_GROUP_NAME == official-client-test-server"
+
+    - location: /scripts/prod-deploy.sh
+      timeout: 60
+      runas: root
+      rules:
+        - condition: "DEPLOYMENT_GROUP_NAME == official-prod-client-server"
