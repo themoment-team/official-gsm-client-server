@@ -2,19 +2,15 @@ version: "3.3"
 
 services:
 
-  redis:
-    image: redis
-    restart: always
-    ports:
-      - "6379:6379"
-
   app:
     image: official-test-server:client
     expose:
       - 56829
     ports:
       - "56829:8080"
-    depends_on:
-      - redis
-    links:
-      - redis
+    logging:
+      driver: awslogs
+      options:
+        awslogs-group: "official-admin-test"
+        awslogs-region: "ap-northeast-2"
+        awslogs-stream: "client-spring-logging"
