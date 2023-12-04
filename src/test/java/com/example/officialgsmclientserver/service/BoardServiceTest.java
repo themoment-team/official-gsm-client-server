@@ -69,7 +69,7 @@ public class BoardServiceTest {
             postRepository.save(post);
 
             File file = File.builder()
-                    .fileUrl("http://bucket.ottokeng.site/743d7afd-690c-404a-b7fb-b6fe97598504.jpg")
+                    .fileUrl("file_url")
                     .fileName("file_name")
                     .fileExtension(FileExtension.JPG)
                     .post(post)
@@ -85,7 +85,7 @@ public class BoardServiceTest {
     @Test
     @DisplayName("게시물 목록 조회")
     void findPostList() {
-        PostListResponse response = boardService.findPostList(0, Category.EVENT_GALLERY);
+        PostListResponse response = boardService.findPostList(1, Category.EVENT_GALLERY, 5);
 
         assertThat(response.getPostList().get(0).getPostTitle()).isEqualTo("title");
         assertThat(response.getPostList().get(0).getThumbnailUrl()).isEqualTo(fileRepository.findAll().get(0).getFileUrl());
@@ -97,12 +97,11 @@ public class BoardServiceTest {
     @DisplayName("게시물 상세 조회")
     void findPost() {
         Post post = postRepository.findAll().get(0);
-        System.out.println(post.getPostSeq());
         PostDetailResponse response = boardService.findPost(post.getPostSeq());
 
         assertThat(response.getPostTitle()).isEqualTo("title");
         assertThat(response.getPostWriter()).isEqualTo("최장우");
-        assertThat(response.getFileInfo().get(0).getFileUrl()).isEqualTo("http://bucket.ottokeng.site/743d7afd-690c-404a-b7fb-b6fe97598504.jpg");
+        assertThat(response.getFileInfo().get(0).getFileUrl()).isEqualTo("file_url");
         assertThat(response.getFileInfo().get(0).getFileExtension()).isEqualTo(FileExtension.JPG);
     }
 }
