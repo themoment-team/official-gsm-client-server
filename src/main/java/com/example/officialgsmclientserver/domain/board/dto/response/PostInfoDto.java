@@ -2,6 +2,10 @@ package com.example.officialgsmclientserver.domain.board.dto.response;
 
 import com.example.officialgsmclientserver.domain.board.entity.post.Category;
 import com.example.officialgsmclientserver.domain.board.entity.post.Post;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +22,8 @@ public class PostInfoDto {
     private Long postSeq;
     private String postTitle;
     private String postWriter;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime createdAt;
     private String thumbnailUrl;
     private String contentPreview;

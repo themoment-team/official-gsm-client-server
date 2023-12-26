@@ -32,7 +32,7 @@ public class BoardController {
             @RequestParam Category category,
             @Parameter(name = "pageSize", description = "조회할 게시물 목록의 페이지크기", in = ParameterIn.PATH)
             @RequestParam int pageSize
-    ) {
+            ) {
         PostListResponse postList = boardService.findPostList(pageNumber, category, pageSize);
         return new ResponseEntity<>(postList, HttpStatus.OK);
     }
