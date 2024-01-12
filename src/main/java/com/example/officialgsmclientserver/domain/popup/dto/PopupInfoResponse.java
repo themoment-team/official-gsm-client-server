@@ -16,15 +16,18 @@ public class PopupInfoResponse {
 
     private String imageUrl;
 
+    private String title;
+
     private String link;
 
     private LocalDateTime expirationDateTime;
 
     public static PopupInfoResponse from(Popup popup) {
         return PopupInfoResponse.builder()
-                .imageUrl(popup.getImageUrl())
-                .link(popup.getLink())
-                .expirationDateTime(popup.getExpirationDateTime())
+                .imageUrl(popup.getPopupImageUrl())
+                .title(popup.getPopupTitle())
+                .link(popup.getPopupLink())
+                .expirationDateTime(popup.getPopupExpirationDateTime())
                 .build();
     }
 }
